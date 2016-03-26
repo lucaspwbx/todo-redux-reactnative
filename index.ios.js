@@ -7,7 +7,6 @@ import React, {
   AppRegistry,
   Component,
   StyleSheet,
-  Text,
   View,
 } from 'react-native';
 
@@ -21,14 +20,18 @@ class FullPluralTodo extends Component {
         {
           task: 'Learn React Native',
         },
+        {
+          task: 'Learn Redux',
+        },
       ],
     };
   }
   render() {
     return (
       <View style={styles.container}>
-        <Text>Hello again</Text>
-        <TaskList />
+        <TaskList
+          todos={this.state.todos}
+        />
       </View>
     );
   }
