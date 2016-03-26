@@ -29,7 +29,7 @@ function todoStore(state = defaultState, action) {
         state: 'done',
       });
       const updateAllTodos = state.allTodos.map((todo) => {
-        return todo == action.todo ? doneTodo : todo;
+        return todo === action.todo ? doneTodo : todo;
       });
       return Object.assign({}, state, {
         allTodos: updateAllTodos,
