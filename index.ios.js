@@ -13,6 +13,7 @@ import React, {
 } from 'react-native';
 
 import TaskList from './TaskList';
+import TaskForm from './TaskForm';
 
 class FullPluralTodo extends Component {
   constructor(props, context) {
@@ -38,7 +39,7 @@ class FullPluralTodo extends Component {
       case 'taskform':
         return (
           <View style={styles.container}>
-            <Text>Add form comes here</Text>
+            <TaskForm>Add form comes here</TaskForm>
           </View>
         );
       default:
@@ -59,7 +60,7 @@ class FullPluralTodo extends Component {
     return (
       <Navigator
         configureScene={this.configureScene}
-        initialRoute={{ name: 'tasklist', index: 0 }}
+        initialRoute={{ name: 'taskform', index: 0 }}
         ref={((nav) => {
           this.nav = nav;
         })}
