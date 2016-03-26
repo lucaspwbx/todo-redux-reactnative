@@ -40,11 +40,11 @@ class FullPluralTodo extends Component {
     });
   }
   onCancel() {
-    console.log('cancelled');
+    // console.log('cancelled');
     this.nav.pop();
   }
   onAdd(task) {
-    console.log(`a task was added: ${task}`);
+    // console.log(`a task was added: ${task}`);
     // this.state.todos.push({ task });
     // this.setState({ todos: this.state.todos });
     store.dispatch({ type: 'ADD_TODO', task });
@@ -60,6 +60,11 @@ class FullPluralTodo extends Component {
     store.dispatch({
       type: 'DONE_TODO',
       todo,
+    });
+  }
+  onToggle() {
+    store.dispatch({
+      type: 'TOGGLE_STATE',
     });
   }
   configureScene() {
@@ -82,7 +87,9 @@ class FullPluralTodo extends Component {
         return (
           <View style={styles.container}>
             <TaskList
+              filter={this.state.filter}
               onDone={this.onDone.bind(this)}
+              onToggle={this.onToggle.bind(this)}
               onAddStarted={this.onAddStarted.bind(this)}
               todos={this.state.todos}
             />

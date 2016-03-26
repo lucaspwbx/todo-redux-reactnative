@@ -8,6 +8,7 @@ const {
   PropTypes,
   TouchableHighlight,
   Text,
+  Switch,
 } = React;
 
 import TaskRow from './TaskRow';
@@ -30,6 +31,15 @@ const styles = StyleSheet.create({
     color: '#FAFAFA',
     fontSize: 20,
     fontWeight: '600',
+  },
+  toggleRow: {
+    flexDirection: 'row',
+    padding: 10,
+  },
+  toggleText: {
+    fontSize: 20,
+    paddingLeft: 10,
+    paddingTop: 3,
   },
 });
 
@@ -61,6 +71,10 @@ class TaskList extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <View style={styles.toggleRow}>
+          <Switch onValueChange={this.props.onToggle} style={styles.switch} value={this.props.filter !== 'pending'} />
+          <Text style={styles.toggleText}>Showing {this.props.todos.length} {this.props.filter} todo(s)</Text>
+        </View>
         <ListView
           dataSource={this.state.dataSource}
           key={this.props.todos}
@@ -81,6 +95,8 @@ TaskList.propTypes = {
   onAddStarted: PropTypes.func.isRequired,
   onDone: PropTypes.func.isRequired,
   todos: PropTypes.arrayOf(PropTypes.object).isRequired,
+  filter: PropTypes.string.isRequired,
+  onToggle: PropTypes.func.isRequired,
 };
 
 export default TaskList;
