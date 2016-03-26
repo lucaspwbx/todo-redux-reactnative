@@ -17,6 +17,10 @@ function todoStore(state = defaultState, action) {
         },
       ]),
       });
+    case 'DONE_TODO':
+      return Object.assign({}, state, {
+        todos: state.todos.filter(todo => todo !== action.todo),
+      });
     default:
       return state;
   }

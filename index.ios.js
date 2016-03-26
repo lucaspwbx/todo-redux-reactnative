@@ -23,7 +23,7 @@ class FullPluralTodo extends Component {
     //     {
     //       task: 'Learn React Native',
     //     },
-    //     {
+    //     :{
     //       task: 'Learn Redux',
     //     },
     //   ],
@@ -51,12 +51,16 @@ class FullPluralTodo extends Component {
     this.nav.pop();
   }
   onDone(todo) {
-    console.log(`a todo was completed: ${todo.task}`);
-    const filteredTodos =
-        this.state.todos.filter((filterTodo) => {
-          return filterTodo !== todo;
-        });
-    this.setState({ todos: filteredTodos });
+    // console.log(`a todo was completed: ${todo.task}`);
+    // const filteredTodos =
+    //     this.state.todos.filter((filterTodo) => {
+    //       return filterTodo !== todo;
+    //     });
+    // this.setState({ todos: filteredTodos });
+    store.dispatch({
+      type: 'DONE_TODO',
+      todo,
+    });
   }
   configureScene() {
     return Navigator.SceneConfigs.FloatFromBottom;
