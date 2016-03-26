@@ -13,20 +13,26 @@ import React, {
 
 import TaskList from './TaskList';
 import TaskForm from './TaskForm';
+import store from './todoStore';
 
 class FullPluralTodo extends Component {
   constructor(props, context) {
     super(props, context);
-    this.state = {
-      todos: [
-        {
-          task: 'Learn React Native',
-        },
-        {
-          task: 'Learn Redux',
-        },
-      ],
-    };
+    // this.state = {
+    //   todos: [
+    //     {
+    //       task: 'Learn React Native',
+    //     },
+    //     {
+    //       task: 'Learn Redux',
+    //     },
+    //   ],
+    // };
+    this.state = store.getState();
+
+    store.subscribe(() => {
+      this.setState(store.getState());
+    });
   }
   onAddStarted() {
     this.nav.push({
@@ -39,8 +45,9 @@ class FullPluralTodo extends Component {
   }
   onAdd(task) {
     console.log(`a task was added: ${task}`);
-    this.state.todos.push({ task });
-    this.setState({ todos: this.state.todos });
+    // this.state.todos.push({ task });
+    // this.setState({ todos: this.state.todos });
+    store.dispatch({ type: 'ADD_TODO', task });
     this.nav.pop();
   }
   onDone(todo) {
