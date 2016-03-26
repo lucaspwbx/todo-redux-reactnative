@@ -46,6 +46,13 @@ class TaskList extends Component {
       dataSource: ds.cloneWithRows(props.todos),
     };
   }
+  componentWillReceiveProps(nextProps) {
+    const dataSource = this
+      .state
+      .dataSource
+      .cloneWithRows(nextProps.todos);
+    this.setState({ dataSource });
+  }
   renderRow(todo) {
     return (
       <TaskRow todo={todo} />
@@ -61,7 +68,8 @@ class TaskList extends Component {
         />
         <TouchableHighlight
           onPress={this.props.onAddStarted}
-          style={styles.button}>
+          style={styles.button}
+        >
           <Text style={styles.buttonText}>Add one</Text>
         </TouchableHighlight>
       </View>

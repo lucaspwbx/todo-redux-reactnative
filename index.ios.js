@@ -39,7 +39,12 @@ class FullPluralTodo extends Component {
       case 'taskform':
         return (
           <View style={styles.container}>
-            <TaskForm>Add form comes here</TaskForm>
+            <TaskForm
+              onAdd={this.onAdd.bind(this)}
+              onCancel={this.onCancel.bind(this)}
+            >
+            Add form comes here
+            </TaskForm>
           </View>
         );
       default:
@@ -53,6 +58,20 @@ class FullPluralTodo extends Component {
         );
     }
   }
+  onCancel() {
+    console.log('cancelled');
+    this.nav.pop();
+  }
+  onAdd(task) {
+    console.log(`a task was added: ${task}`);
+    // property shorthand ????
+    // this.state.todos.push( {
+    //   task: task
+  // });
+    this.state.todos.push({ task });
+    this.setState({ todos: this.state.todos });
+    this.nav.pop();
+  }
   configureScene() {
     return Navigator.SceneConfigs.FloatFromBottom;
   }
@@ -60,7 +79,7 @@ class FullPluralTodo extends Component {
     return (
       <Navigator
         configureScene={this.configureScene}
-        initialRoute={{ name: 'taskform', index: 0 }}
+        initialRoute={{ name: 'tasklist', index: 0 }}
         ref={((nav) => {
           this.nav = nav;
         })}

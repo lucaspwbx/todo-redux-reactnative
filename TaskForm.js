@@ -7,6 +7,7 @@ const {
   TouchableHighlight,
   Component,
   StyleSheet,
+  PropTypes,
 } = React;
 
 const styles = StyleSheet.create({
@@ -17,13 +18,14 @@ const styles = StyleSheet.create({
     // backgroundColor: '#F7F7F7',
   },
   input: {
-    // borderWidth: 1,
-    // borderColor: '#D7D7D7',
-    // height: 50,
-    // marginLeft: 10,
-    // marginRight: 10,
-    // padding: 15,
-    // borderRadius: 3,
+    borderWidth: 1,
+    borderColor: '#D7D7D7',
+    height: 50,
+    marginLeft: 10,
+    marginRight: 10,
+    padding: 15,
+    borderRadius: 3,
+    width: 250,
   },
   buttonText: {
     // fontSize: 18,
@@ -48,24 +50,40 @@ const styles = StyleSheet.create({
 class TaskForm extends Component {
   constructor(props, context) {
     super(props, context);
-
-    this.state = {
-      task: '',
-    };
+  }
+  onChange(text) {
+    this.task = text;
+  }
+  onAddPressed() {
+    this.props.onAdd(this.task);
   }
   render() {
     return (
       <View style={styles.container}>
-        <TextInput style={styles.input} />
-        <TouchableHighlight style={styles.button}>
+        <TextInput
+          onChangeText={this.onChange.bind(this)}
+          style={styles.input}
+        />
+        <TouchableHighlight
+          onPress={this.onAddPressed.bind(this)}
+          style={styles.button}
+        >
           <Text style={styles.buttonText}>Add</Text>
         </TouchableHighlight>
-        <TouchableHighlight style={[styles.button, styles.cancelButton]}>
+        <TouchableHighlight
+          onPress={this.props.onCancel}
+          style={[styles.button, styles.cancelButton]}
+        >
           <Text style={styles.buttonText}>Cancel</Text>
         </TouchableHighlight>
       </View>
     );
   }
 }
+
+TaskForm.propTypes = {
+  onCancel: PropTypes.func.isRequired,
+  onAdd: PropTypes.func.isRequired,
+};
 
 export default TaskForm;
