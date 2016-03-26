@@ -9,7 +9,6 @@ import React, {
   StyleSheet,
   View,
   Navigator,
-  Text,
 } from 'react-native';
 
 import TaskList from './TaskList';
@@ -34,6 +33,27 @@ class FullPluralTodo extends Component {
       name: 'taskform',
     });
   }
+  onCancel() {
+    console.log('cancelled');
+    this.nav.pop();
+  }
+  onAdd(task) {
+    console.log(`a task was added: ${task}`);
+    this.state.todos.push({ task });
+    this.setState({ todos: this.state.todos });
+    this.nav.pop();
+  }
+  onDone(todo) {
+    console.log(`a todo was completed: ${todo.task}`);
+    const filteredTodos =
+        this.state.todos.filter((filterTodo) => {
+          return filterTodo !== todo;
+        });
+    this.setState({ todos: filteredTodos });
+  }
+  configureScene() {
+    return Navigator.SceneConfigs.FloatFromBottom;
+  }
   renderScene(route, nav) {
     switch (route.name) {
       case 'taskform':
@@ -51,29 +71,13 @@ class FullPluralTodo extends Component {
         return (
           <View style={styles.container}>
             <TaskList
+              onDone={this.onDone.bind(this)}
               onAddStarted={this.onAddStarted.bind(this)}
               todos={this.state.todos}
             />
           </View>
         );
     }
-  }
-  onCancel() {
-    console.log('cancelled');
-    this.nav.pop();
-  }
-  onAdd(task) {
-    console.log(`a task was added: ${task}`);
-    // property shorthand ????
-    // this.state.todos.push( {
-    //   task: task
-  // });
-    this.state.todos.push({ task });
-    this.setState({ todos: this.state.todos });
-    this.nav.pop();
-  }
-  configureScene() {
-    return Navigator.SceneConfigs.FloatFromBottom;
   }
   render() {
     return (

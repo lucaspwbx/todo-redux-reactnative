@@ -55,7 +55,7 @@ class TaskList extends Component {
   }
   renderRow(todo) {
     return (
-      <TaskRow todo={todo} />
+      <TaskRow onDone={this.props.onDone} todo={todo} />
     );
   }
   render() {
@@ -64,7 +64,7 @@ class TaskList extends Component {
         <ListView
           dataSource={this.state.dataSource}
           key={this.props.todos}
-          renderRow={this.renderRow}
+          renderRow={this.renderRow.bind(this)}
         />
         <TouchableHighlight
           onPress={this.props.onAddStarted}
@@ -79,6 +79,7 @@ class TaskList extends Component {
 
 TaskList.propTypes = {
   onAddStarted: PropTypes.func.isRequired,
+  onDone: PropTypes.func.isRequired,
   todos: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
