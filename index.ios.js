@@ -26,10 +26,14 @@ class FullPluralTodo extends Component {
       ],
     };
   }
+  onAddStarted() {
+    console.log('on add started');
+  }
   render() {
     return (
       <View style={styles.container}>
         <TaskList
+          onAddStarted={this.onAddStarted.bind(this)}
           todos={this.state.todos}
         />
       </View>
