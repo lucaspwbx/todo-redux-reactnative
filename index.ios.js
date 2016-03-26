@@ -11,20 +11,24 @@ import React, {
   View,
 } from 'react-native';
 
+import TaskList from './TaskList';
+
 class FullPluralTodo extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      todos: [
+        {
+          task: 'Learn React Native',
+        },
+      ],
+    };
+  }
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
+        <Text>Hello again</Text>
+        <TaskList />
       </View>
     );
   }
@@ -36,16 +40,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
   },
 });
 
